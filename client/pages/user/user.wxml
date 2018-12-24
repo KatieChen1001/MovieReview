@@ -1,0 +1,13 @@
+<view>
+<view wx:if="{{!userInfo}}">
+<button class="unlogin-btn" open-type="getUserInfo" bindgetuserinfo="onTapLogin">微信登录</button>
+</view>
+
+<view wx:else> 
+  <text>{{userInfo.nickName}}</text>
+  <text>{{userInfo.avatarURL}}</text>
+  <text>{{userInfo.city}}</text>
+  
+ </view>
+
+ </view>

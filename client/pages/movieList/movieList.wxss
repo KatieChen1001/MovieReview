@@ -1,0 +1,36 @@
+page{
+  background-color:#ededed;
+}
+.movieList-container{
+  padding-top:60rpx;
+}
+
+.movie-thumbnail{
+  background-color: white;
+  height: 320rpx;
+  width:650rpx;
+  margin: 0 auto;
+  margin-bottom:60rpx;
+  display: flex;
+  flex-direction: row;
+}
+
+.movielist-img{
+  width: 216rpx;
+  height: 320rpx;
+  /* 36% = 216/600 */
+  flex: 0 0 36%;
+}
+
+.movieText-container{
+  flex:0 0 64%;
+  display: flex;
+  flex-direction: column;
+  align-content: space-between;
+}
+
+.movieText{
+  font-size:30rpx;
+  text-align: center;
+  padding: 30rpx;
+}

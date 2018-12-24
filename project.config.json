@@ -1,0 +1,54 @@
+{
+	"client": "./client",
+	"svr": "./server",
+	"miniprogramRoot": "./client",
+	"qcloudRoot": "./server",
+	"setting": {
+		"urlCheck": false,
+		"es6": true,
+		"postcss": true,
+		"minified": true,
+		"newFeature": true
+	},
+	"appid": "wxddfc1102b7e4a72c",
+	"projectname": "MovieReview",
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"list": []
+		},
+		"miniprogram": {
+			"current": 2,
+			"list": [
+				{
+					"id": -1,
+					"name": "LoginTest",
+					"pathName": "pages/user/user",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "movieList",
+					"pathName": "pages/movieList/movieList",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "movieDetails",
+					"pathName": "pages/movieDetails/movieDetails"
+				}
+			]
+		}
+	}
+}

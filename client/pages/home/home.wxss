@@ -1,0 +1,29 @@
+/* pages/home/home.wxss */
+.homepageImg{
+  width: 540rpx;
+  height: 800rpx;
+}
+
+.center{
+  width: 100%;
+  height: 100%;
+  display: flex; 
+  justify-content: center;
+}
+.homepageTabBar{
+  height:50rpx;
+  position: fixed;
+  bottom: 0rpx;
+  flex-direction: row;
+  padding-bottom: 18rpx;
+}
+
+.text-box{
+  margin-top:10rpx;
+}
+
+text .text-box{
+  padding: 16rpx 0rpx;
+  font-size: 18rpx;
+}
+

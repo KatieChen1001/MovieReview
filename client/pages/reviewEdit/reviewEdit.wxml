@@ -1,0 +1,22 @@
+<view>
+  <view class="movie-detail-container">
+    <view class="movie-detail-img" >
+      <image src='{{image}}'></image>
+    </view>
+    
+    <view class='movie-text'>
+      <view class='movie-title'>{{title}}</view>
+    </view>
+
+
+      <textarea class="review-input" bindblur="bindTextAreaBlur" auto-focus="true" />
+    
+    <view>
+      <button class='record'>录音</button>
+    </view>
+  </view>
+
+    <view class='movie-btn-container'>
+      <button bindtap='onTapNavigateTo' data-title="{{title}}">完成</button>
+    </view>
+  </view>

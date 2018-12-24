@@ -1,0 +1,21 @@
+<view>
+<view class="movie-detail-container">
+  <view class="movie-detail-img" >
+    <image src='{{image}}'></image>
+  </view>
+  
+  <view class='movie-text'>
+    <view class='movie-title'>{{title}}</view>
+    <view class='movie-description'>{{intro}}</view>
+  </view>
+</view>
+
+<view class='addReview-container'>
+  <navigator class='movie-btn' url='/pages/reviewEdit/reviewEdit?title={{title}}&image={{image}}' hover-class='other-navigator-hover'>文字</navigator>
+  <navigator class='movie-btn border-bottom'>音频</navigator>
+  <navigator class='movie-btn'>取消</navigator>
+  <!-- <button bindtap='onTapNavigateTo' data-title="{{title}}" data-image="{{image}}">文字</button> -->
+  <!-- <button class='border-bottom'>音频</button>
+  <button>取消</button> -->
+</view>
+</view>

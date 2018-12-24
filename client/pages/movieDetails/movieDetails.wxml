@@ -1,0 +1,19 @@
+<view class="movie-detail-container">
+  <view class="movie-detail-img" >
+    <image src='{{image}}'></image>
+  </view>
+  
+  <view class='movie-text'>
+    <view class='movie-title'>{{title}}</view>
+    <view class='movie-description'>{{intro}}</view>
+  </view>
+
+  <view class='movie-btn-container'>
+    <navigator class='movie-btn'>查看影评</navigator>
+    <!-- <button class='movie-btn'>查看影评</button> -->
+    <!-- <button class='movie-btn'> -->
+    <navigator url="/pages/addReview/addReview?title={{title}}&image={{image}}&intro={{intro}}" class='movie-btn'>添加影评</navigator>
+    <!-- </button> -->
+    <!-- <button class='movie-btn' bindtap='onTapAddReview' data-image="{{image}}" data-title="{{title}}" data-intro="{{intro}}">添加影评</button> -->
+  </view>
+</view>
