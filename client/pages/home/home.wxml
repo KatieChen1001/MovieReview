@@ -1,13 +1,13 @@
 <!--pages/home/home.wxml-->
 <view>
   <view class='center'>
-    <image class='homepageImg' src="{{movieList[2].image}}" mode='scaleToFill'></image>
+    <image class='homepageImg' src="{{posterMovie.image}}" mode='scaleToFill'></image>
   </view>
-    <view class='center text-box'><text>{{movieList[2].title}}</text></view>
-    <view class='center text-box'><text>{{movieList[2].category}}</text></view>
+    <view class='center text-box'><text>{{posterMovie.title}}</text></view>
+    <view class='center text-box'><text>{{posterMovie.category}}</text></view>
 
   <view class='homepageTabBar center'>
-    <view class='center'><text bindtap='onTapNavigateTo'>热门</text></view>
-    <view class='center' onTap><text>我的</text></view>
+    <view class='center' bindtap='onTapNavigateTo'><text>热门</text></view>
+    <view class='center' bindtap='onTapNavigateToMine'><text>我的</text></view>
   </view>
 </view>

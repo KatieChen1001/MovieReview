@@ -1,2 +1,13 @@
-<!--pages/reviewList/reviewList.wxml-->
-<text>pages/reviewList/reviewList.wxml</text>
+<view class="review-card" wx:if="{{commentList.length > 0}}" wx:for="{{commentList}}">
+  <view class='reviewer-info'>
+    <image src='{{item.useravatar}}' class='reviewer-avatar'></image>
+    <text class='reviewer-name'>{{item.username}}</text>
+  </view>
+  <view class='review-content' wx:if="{{item.type == 'text'}}">{{item.content}}</view>
+  <audio class='review-content audio' wx:if="{{item.type == 'audio'}}" data-src="{{item.content}}" catchtap='playRecording'>this is audio</audio>
+</view>
+
+<view wx:if="{{commentList.length == 0}}">
+  <text>Be the first to review this movie!</text>
+</view>
+

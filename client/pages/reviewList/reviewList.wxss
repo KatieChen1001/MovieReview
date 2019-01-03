@@ -1,1 +1,38 @@
 /* pages/reviewList/reviewList.wxss */
+.review-card{
+  margin: 50rpx 27rpx 0;
+  background: #FFFFFF;
+  box-shadow: 0 2rpx 13rpx 5rpx rgba(0, 0, 0, 0.02);
+  border-radius: 13rpx;
+}
+
+.reviewer-info{
+  display: flex;
+  align-items: center;
+  height: 200rpx;
+}
+
+.reviewer-avatar{
+  flex-shrink: 0;
+  margin-left: 53rpx;
+  height: 100rpx;
+  width: 100rpx;
+  background: #F5E069;
+  border-radius: 50%;
+}
+
+.reviewer-name{
+  flex: 1;
+  margin: 0 31rpx;
+  font-weight: bold;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.review-content{
+  margin-left: 53rpx;
+  margin-right:31rpx;
+  padding-bottom: 50rpx;
+  font-size: 28rpx;
+}

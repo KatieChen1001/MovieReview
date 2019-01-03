@@ -1,18 +1,48 @@
 // pages/reviewList/reviewList.js
+
+const qcloud = require('../../vendor/wafer2-client-sdk/index');
+const config = require('../../config.js');
+const innerAudioContext = wx.createInnerAudioContext();
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
+    movieId: "",
+    commentList: []
+  },
 
+  getReviewList: function(id){
+    qcloud.request({
+      url: config.service.comment + id,
+      success: res => {
+        let data = res.data.data
+        console.log(data);
+        this.setData({
+          commentList: data
+        })
+      },
+      fail: res => {
+        console.log(res)
+      }
+    })
   },
 
   /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
+ * 如果影评是录音，点击播放录音
+ */
+  playRecording(e) {
+    let src = e.currentTarget.dataset.src
+    console.log(src);
+    innerAudioContext.autoplay = true
+    innerAudioContext.src = src
+    innerAudioContext.play()
+  },
 
+  onLoad: function (options) {
+    console.log(options);
+    this.getReviewList(options.id);
+    console.log(options.id);
+    this.setData({
+      movieId: options.id
+    })
   },
 
   /**

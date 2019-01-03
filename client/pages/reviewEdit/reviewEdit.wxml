@@ -1,22 +1,80 @@
-<view>
-  <view class="movie-detail-container">
-    <view class="movie-detail-img" >
-      <image src='{{image}}'></image>
+<view class='wrapper'>
+  <!-- bg and poster -->
+  <view class='card'>
+    <image
+        class='poster'
+        src='{{movie.image}}'
+      />
+    <view class='title' mode='widthFix'>
+      {{ movie.title }}
     </view>
-    
-    <view class='movie-text'>
-      <view class='movie-title'>{{title}}</view>
-    </view>
+    <!-- enter comment area -->
+    <form
+      wx:if='{{!inPreviewMode}}'
+      class='review-form'
+      bindsubmit="enterPreviewMode">
+      <!-- if comment is text form -->
+      <textarea
+        wx:if="{{type == 'text'}}"
+        placeholder='输入你的影评内容...'
+        name='review'
+        value='{{review}}'
+        class='review-form-textarea'
+        auto-focus="true" />
+        <!-- if comment is audio form -->
+      <button
+        wx:if="{{type == 'audio' && !filePath}}"
+        bindtouchstart="touchdown"
+        bindtouchend="touchup"
+      >
+        {{ isSpeaking? '录音中...' : '按住录音'}}
+      </button>
+      <button
+        wx:if="{{type=='audio' && !!filePath}}"
+        bindtap='playRecording'
+      >
+        {{ isPlaying ? '播放中...' : '点击播放影评'}}
+      </button>
+      <!-- get to preview -->
+      <button
+        class='button-complete'
+        form-type="submit"
+      >
+        完成
+      </button>
+    </form>
 
+    <!-- re-render preview section -->
+    <view class='review-preview' wx:if='{{inPreviewMode}}'>
+      <view class='review-user'>
+        <image
+          class='review-user-avatar'
+          src='{{userInfo.avatarUrl}}'
+        />
+        <view class='review-user-name'>
+          {{ userInfo.nickName }}的影评
+        </view>
+      </view>
 
-      <textarea class="review-input" bindblur="bindTextAreaBlur" auto-focus="true" />
-    
-    <view>
-      <button class='record'>录音</button>
+      <view
+        class='review-content'
+        wx:if="{{type=='text'}}"
+      >
+        {{review}}
+      </view>
+      <button
+        class='review-content'
+        wx:if="{{type=='audio'}}"
+        bindtap='playRecording'
+      >
+        {{ isPlaying ? '播放中...' : '点击播放影评'}}
+      </button>
+      <view class='buttons'>
+        <button bindtap='enterEditMode'>重新编辑</button>
+        <button bindtap='publishReview'>
+          发布影评
+        </button>
+      </view>
     </view>
   </view>
-
-    <view class='movie-btn-container'>
-      <button bindtap='onTapNavigateTo' data-title="{{title}}">完成</button>
-    </view>
-  </view>
+</view>

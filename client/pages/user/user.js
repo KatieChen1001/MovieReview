@@ -1,21 +1,22 @@
-const qcloud = require('../../vendor/wafer2-client-sdk/index');
-const config = require('../../config.js');
+// / pages/user / user.js
+var qcloud = require('../../vendor/wafer2-client-sdk/index')
+var config = require('../../config')
 
-let userInfo;
 Page({
+
   data: {
-      userInfo: null
+    userInfo: null,
   },
 
   onLoad: function (options) {
     this.checkSession({
-      success: ({userInfo}) => {
+      success: ({ userInfo }) => {
         this.setData({
           userInfo: userInfo
         })
       },
-      error: () => {
-
+      error: ({res}) => { 
+        console.log(res)
       }
     })
   },
@@ -23,10 +24,10 @@ Page({
   checkSession({ success, error }) {
     wx.checkSession({
       success: () => {
-        this.getUserInfo({ success, error })
+        this.doQcloudLogin({success, error})
       },
-      fail: () => {
-        error && error()
+      error: (res) => {
+        console.log(res)
       }
     })
   },
@@ -37,62 +38,36 @@ Page({
         this.setData({
           userInfo: userInfo
         })
+      },
+      fail: ({res}) => {
+        console.log(res)
       }
     })
   },
 
   doQcloudLogin({ success, error }) {
+    // 调用 qcloud 登陆接口
+    qcloud.setLoginUrl(config.service.loginUrl)
     qcloud.login({
       success: result => {
-        console.log(result);
+        console.log(result)
         if (result) {
           let userInfo = result
           success && success({
             userInfo
           })
-        } else {
-          // 如果不是首次登录，不会返回用户信息，请求用户信息接口获取
-          this.getUserInfo({ success, error })
-        }
+        } 
       },
-      fail: () => {
-        error && error()
+      fail: result => {
+        // error && error()
+        console.log(result)
       }
     })
   },
 
-  getUserInfo({ success, error }) {
-    if (!userInfo){
-      qcloud.request({
-        url: config.service.requestUrl,
-        login: true,
-        success: result => {
-          console.log(result);
-          let data = result.data
-
-          if (!data.code) {
-            let userInfo = data.data
-            console.log(userInfo);
-            success && success({
-              userInfo
-            })
-          } else {
-            error && error()
-          }
-        },
-        fail: () => {
-          error && error()
-        }
-      })
-    } else {
-      this.setData({
-        userInfo:userInfo
-      })
-    }
-    
-  },
-
-
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
   onReady: function () {
 
   },

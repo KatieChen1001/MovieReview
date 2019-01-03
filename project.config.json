@@ -4,7 +4,7 @@
 	"miniprogramRoot": "./client",
 	"qcloudRoot": "./server",
 	"setting": {
-		"urlCheck": false,
+		"urlCheck": true,
 		"es6": true,
 		"postcss": true,
 		"minified": true,
@@ -29,7 +29,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 2,
+			"current": 3,
 			"list": [
 				{
 					"id": -1,
@@ -46,7 +46,13 @@
 				{
 					"id": -1,
 					"name": "movieDetails",
-					"pathName": "pages/movieDetails/movieDetails"
+					"pathName": "pages/movieDetails/movieDetails",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "reviewList",
+					"pathName": "pages/reviewList/reviewList"
 				}
 			]
 		}

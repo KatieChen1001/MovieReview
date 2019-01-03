@@ -4,7 +4,8 @@ Page({
   data: {
     title: "",
     image: "",
-    intro:""
+    intro:"",
+    id: ""
     // title: "三傻大闹宝莱坞",
     // image: "https://movie-1257643707.cos.ap-guangzhou.myqcloud.com/p579729551.jpg",
     // intro: "本片根据印度畅销书作家奇坦·巴哈特（Chetan Bhagat）的处女作小说《五点人》（Five Point Someone）改编"
@@ -14,7 +15,8 @@ Page({
     this.setData({
       title: options.title,
       image: options.image,
-      intro: options.intro
+      intro: options.intro,
+      id: options.id
     })
   },
 

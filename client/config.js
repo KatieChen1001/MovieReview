@@ -23,7 +23,17 @@ var config = {
         // 上传图片接口
         uploadUrl: `${host}/weapp/upload`,
 
-        movieList: `${host}/weapp/movies`
+        // 获取所有的电影列表信息
+        movieList: `${host}/weapp/movie`,
+
+        // 获取点击的电影详细信息
+        movieDetail: `${host}/weapp/movie/`,
+
+        // 获取某一部被选中电影的所有评论
+        comment: `${host}/weapp/comment/`,
+
+        // 添加评论
+        addComment: `${host}/weapp/comment`,
     }
 };
 

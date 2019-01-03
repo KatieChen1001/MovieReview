@@ -2,61 +2,72 @@
 
 const qcloud = require('../../vendor/wafer2-client-sdk/index');
 const config = require('../../config.js');
-let allMovies = [];
 
 Page({
   data: {
-    movieList:[]
+    posterMovie:{}
   },
 
-  getMovieList: function(){
+  getAMovie() {
+    let movieId = Math.floor(Math.random() * (15 - 1) + 1)
     wx.showLoading({
-      title: 'Loading...',
+      title: 'Loading',
     })
 
     qcloud.request({
-      url: config.service.movieList,
-      success: (response) => {
+      url: config.service.movieDetail + movieId,
+      success: res => {
         wx.hideLoading()
 
-        let data = response.data
-
-        allMovies = data.data
-        
-        if(!data.code){
+        let data = res.data
+        console.log(data)
+        if (!data.code) {
+          // this.getMovieComment(movieId)
           this.setData({
-            movieList: data.data
+            posterMovie: data.data
+            // movieId
           })
-          allMovies = data.data
         } else {
           wx.showToast({
             icon: 'none',
-            title: '商品数据加载错误',
+            title: '加载失败',
+            image: '../../image/error.svg'
           })
+
+          setTimeout(() => {
+            wx.navigateTo({
+              url: '/pages/hot_movie/hot_movie',
+            })
+          }, 2000)
         }
       },
-      fail: function (err) {
+      fail: res => {
         wx.hideLoading()
+
+        console.log(res)
+
         wx.showToast({
           icon: 'none',
-          title: 'Loading Failed :/'
+          title: 'Loading Failed'
         })
-        console.log(err);
       }
     })
   },
 
   onTapNavigateTo: function(){
-    console.log(allMovies)
+      wx.navigateTo({
+        url: '/pages/movieList/movieList'
+      })
+  },
+
+  onTapNavigateToMine: function () {
     wx.navigateTo({
-      // 为避免在电影列表页面再次请求电影列表消耗更长时间 选择将主页请求获取的电影数据直接传给电影列表页
-      // 在不同页面之间传递array的方法：JSON.stringify()
-      url: '/pages/movieList/movieList?dataset=' + JSON.stringify(this.data.movieList),
+      url: '/pages/user/user'
     })
   },
 
   onLoad: function () {
-    this.getMovieList();
+    this.getAMovie();
   },
 
   onReady: function () {

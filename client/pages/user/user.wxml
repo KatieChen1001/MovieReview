@@ -1,13 +1,18 @@
-<view>
 <view wx:if="{{!userInfo}}">
-<button class="unlogin-btn" open-type="getUserInfo" bindgetuserinfo="onTapLogin">微信登录</button>
+  <view class="unlogin-card">
+    <view class="unlogin-head"></view>
+    <view class="unlogin-info">
+      <view class="unlogin-text">未登录</view>
+      <view class="unlogin-tips">登陆查看已收藏的评论</view>
+    </view>
+  </view>
+  <button class="unlogin-btn" open-type='getUserInfo' bindgetuserinfo='onTapLogin'>微信登录</button>
 </view>
 
-<view wx:else> 
-  <text>{{userInfo.nickName}}</text>
-  <text>{{userInfo.avatarURL}}</text>
-  <text>{{userInfo.city}}</text>
-  
- </view>
+<view class="user-card" wx:else>
+  <view class="user-info">
+    <image class="user-head" src="{{userInfo.avatarUrl}}"></image>
+    <view class="user-name">{{userInfo.nickName}}</view>
+  </view>
+</view>
 
- </view>

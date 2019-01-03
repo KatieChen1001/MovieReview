@@ -11,9 +11,12 @@ const controllers = require('../controllers')
 const { auth: { authorizationMiddleware, validationMiddleware } } = require('../qcloud')
 
 // --- 登录与授权 Demo --- //
-// 登录接口
+// 登录接口 - 验证用户登陆
+// AuthorizationMiddleware - 确认登陆授权的中间件
 router.get('/login', authorizationMiddleware, controllers.login)
-// 用户信息接口（可以用来验证登录态）
+// 用户信息接口（可以用来验证登录态） - 获取用户数据
+// validationMiddleware - 验证登录状态的中间件
+// 需要验证是否已经登陆的时候只需要使用 validationMiddleware 即可
 router.get('/user', validationMiddleware, controllers.user)
 
 // --- 图片上传 Demo --- //
@@ -32,6 +35,13 @@ router.get('/message', controllers.message.get)
 // POST 用来处理微信转发过来的客服消息
 router.post('/message', controllers.message.post)
 
+// get完整的电影列表
 router.get('/movie',controllers.movie.list)
+// get电影详情
+router.get('/movie/:id', controllers.movie.detail)
+// get选中电影的所有评论
+router.get('/comment/:id', controllers.comment.list)
+// post新的影评
+router.post('/comment', validationMiddleware, controllers.comment.add)
 
 module.exports = router

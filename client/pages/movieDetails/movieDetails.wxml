@@ -9,11 +9,7 @@
   </view>
 
   <view class='movie-btn-container'>
-    <navigator class='movie-btn'>查看影评</navigator>
-    <!-- <button class='movie-btn'>查看影评</button> -->
-    <!-- <button class='movie-btn'> -->
-    <navigator url="/pages/addReview/addReview?title={{title}}&image={{image}}&intro={{intro}}" class='movie-btn'>添加影评</navigator>
-    <!-- </button> -->
-    <!-- <button class='movie-btn' bindtap='onTapAddReview' data-image="{{image}}" data-title="{{title}}" data-intro="{{intro}}">添加影评</button> -->
+    <navigator class='movie-btn' url='/pages/reviewList/reviewList?id={{movieID}}'>查看影评</navigator>
+    <navigator url="/pages/addReview/addReview?title={{title}}&image={{image}}&intro={{intro}}&id={{movieID}}" class='movie-btn'>添加影评</navigator>
   </view>
 </view>

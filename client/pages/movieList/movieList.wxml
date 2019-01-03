@@ -1,5 +1,5 @@
 <view class="movieList-container">
-  <view class='movie-thumbnail' wx:for="{{movieList}}" wx:key="{{item.id}}" bindtap='onTapViewDetail' data-image="{{item.image}}" data-title="{{item.title}}" data-intro="{{item.description}}">
+  <view class='movie-thumbnail' wx:for="{{movieList}}" wx:key="{{item.id}}" bindtap='onTapViewDetail' data-image="{{item.image}}" data-title="{{item.title}}" data-intro="{{item.description}}" data-id="{{item.id}}">
     <image src='{{item.image}}' class='movielist-img'></image>
     <view class='movieText-container'>
       <view class='movieText'>{{item.title}}</view>
