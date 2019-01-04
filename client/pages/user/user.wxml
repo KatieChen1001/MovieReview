@@ -14,5 +14,7 @@
     <image class="user-head" src="{{userInfo.avatarUrl}}"></image>
     <view class="user-name">{{userInfo.nickName}}</view>
   </view>
+  <button class="unlogin-btn" bindtap='getIPosted'>我发表的</button>
+  <button class="unlogin-btn" bindtap='getMyFav'>我收藏的</button>
 </view>
 

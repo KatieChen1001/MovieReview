@@ -34,6 +34,12 @@ var config = {
 
         // 添加评论
         addComment: `${host}/weapp/comment`,
+
+        // GET Movie Detail
+        commentDetail: `${host}/weapp/comment/detail/`,
+
+        // POST - add to favorite
+        addToFav: `${host}/weapp/fav`
     }
 };
 

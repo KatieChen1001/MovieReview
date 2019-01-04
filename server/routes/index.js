@@ -43,5 +43,9 @@ router.get('/movie/:id', controllers.movie.detail)
 router.get('/comment/:id', controllers.comment.list)
 // post新的影评
 router.post('/comment', validationMiddleware, controllers.comment.add)
+// GET 影评详情（电影信息和影评内容）
+router.get('/comment/detail/:id', controllers.comment.detail)
+// POST 添加新的影评到收藏列表 - TABLE "fav"
+router.post('/fav', validationMiddleware, controllers.fav.add)
 
 module.exports = router

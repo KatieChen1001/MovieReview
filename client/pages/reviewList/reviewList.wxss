@@ -36,3 +36,10 @@
   padding-bottom: 50rpx;
   font-size: 28rpx;
 }
+
+.empty{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height:200rpx;
+}

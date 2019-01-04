@@ -1,4 +1,6 @@
 // pages/addReview/addReview.js
+const qcloud = require('../../vendor/wafer2-client-sdk/index');
+const config = require('../../config.js');
 Page({
 
   data: {
@@ -6,16 +8,29 @@ Page({
     image: "",
     intro:"",
     id: ""
-    // title: "三傻大闹宝莱坞",
-    // image: "https://movie-1257643707.cos.ap-guangzhou.myqcloud.com/p579729551.jpg",
-    // intro: "本片根据印度畅销书作家奇坦·巴哈特（Chetan Bhagat）的处女作小说《五点人》（Five Point Someone）改编"
+  },
+
+  getMovieDetail(id){
+    qcloud.request({
+      url: config.service.movieDetail + id,
+      success: res => {
+        console.log(res.data.data);
+        let data = res.data.data;
+        this.setData({
+          title: data.title,
+          image: data.image,
+          intro: data.description
+        })
+      },
+      fail: res => {
+        console.log(res)
+      }
+    })
   },
 
   onLoad: function (options) {
+    this.getMovieDetail(options.id);
     this.setData({
-      title: options.title,
-      image: options.image,
-      intro: options.intro,
       id: options.id
     })
   },

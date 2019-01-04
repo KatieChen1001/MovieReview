@@ -15,5 +15,11 @@ module.exports = {
     let content = ctx.request.body.content || null
     let type = ctx.request.body.type
     await DB.query('INSERT INTO comment(user, username, useravatar, content, movie_id, type) VALUES (?, ?, ?, ?, ?, ?)', [user, username, useravatar, content, movie_id, type])
+  },
+
+  detail: async ctx => {
+    let id = ctx.params.id;
+    ctx.state.data = (await DB.query(
+      "SELECT comment.id, comment.content, comment.type, comment.useravatar, comment.username, movies.image, movies.title, comment.movie_id FROM comment RIGHT JOIN movies ON comment.movie_id = movies.id WHERE comment.id = ?",id ))[0];
   }
 }
