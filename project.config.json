@@ -29,7 +29,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 3,
+			"current": 4,
 			"list": [
 				{
 					"id": -1,
@@ -52,7 +52,13 @@
 				{
 					"id": -1,
 					"name": "reviewList",
-					"pathName": "pages/reviewList/reviewList"
+					"pathName": "pages/reviewList/reviewList",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "user",
+					"pathName": "pages/user/user"
 				}
 			]
 		}

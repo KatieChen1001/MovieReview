@@ -47,5 +47,7 @@ router.post('/comment', validationMiddleware, controllers.comment.add)
 router.get('/comment/detail/:id', controllers.comment.detail)
 // POST 添加新的影评到收藏列表 - TABLE "fav"
 router.post('/fav', validationMiddleware, controllers.fav.add)
+// GET 用户收藏的影评列表和用户发表的影评列表
+router.get('/mine', validationMiddleware, controllers.mine.list)
 
 module.exports = router

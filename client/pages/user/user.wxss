@@ -86,3 +86,120 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+/* 选择列表展示的按钮区 */
+
+.tab-button-container{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: 50rpx 27rpx 0;
+  background: #FFFFFF;
+  box-shadow: 0 2rpx 13rpx 5rpx rgba(0, 0, 0, 0.02);
+  border-radius: 13rpx;
+}
+
+.tab-button{
+  margin: 34rpx auto 0;
+  line-height: 80rpx;
+  border-radius: 13rpx;
+  border: none;
+  font-size: 30rpx;
+  text-align: center;
+  color: #34373D;
+  font-weight: bold;
+}
+
+.tab-button button{
+  outline:none;
+  border:none;
+  list-style: none; 
+  background: none;
+}
+.tab-button button::after{
+  border:none;
+}
+
+.active{
+  color: red;
+}
+
+.inactive{
+  color: blue;
+}
+
+/* 用户收藏 | 用户发表的列表展示 */
+
+.users-list-container{
+  box-shadow: 0 2rpx 13rpx 5rpx rgba(0, 0, 0, 0.02);
+  border-radius: 13rpx;
+}
+
+.review-card{
+  height: 320rpx;
+  width:650rpx;
+  margin: 0 auto;
+  margin-bottom:60rpx;
+  display: flex;
+  flex-direction: row;
+}
+
+.review-movie-image{
+  width: 216rpx;
+  height: 320rpx;
+  /* 36% = 216/600 */
+  flex: 0 0 36%;
+}
+
+.review-text-container{
+  font-size: 28rpx;
+  height: 320rpx;
+  width: 434rpx;
+  padding: 30rpx 50rpx 0 50rpx;
+  display: flex;
+  flex-direction: column;
+  
+}
+
+.review-title-container{
+  font-size: 34rpx;
+  font-weight: 800;
+}
+
+.review-content-container{
+  /* height: 120rpx; */
+  width: 334rpx;
+  margin-top: 20rpx;
+  margin-bottom: 20rpx;
+}
+
+.reviewer-info-container{
+  display: flex;
+  align-items: center;
+}
+
+.review-content-container.text{
+  overflow: scroll;
+}
+
+.review-content-container.audio{
+  padding-top: 30rpx;
+}
+
+.review-content-container.audio button{
+  font-size: 28rpx;
+}
+
+
+
+.reviewer-avatar{
+  flex-shrink: 0;
+  height: 60rpx;
+  width: 60rpx;
+  border-radius: 50%;
+}
+
+.reviewer-username{
+  margin-left: 30rpx;
+}
+

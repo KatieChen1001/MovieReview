@@ -9,12 +9,54 @@
   <button class="unlogin-btn" open-type='getUserInfo' bindgetuserinfo='onTapLogin'>微信登录</button>
 </view>
 
-<view class="user-card" wx:else>
-  <view class="user-info">
-    <image class="user-head" src="{{userInfo.avatarUrl}}"></image>
-    <view class="user-name">{{userInfo.nickName}}</view>
+
+<view class='logged-in-container' wx:else>
+  <view class="user-card">
+    <view class="user-info">
+      <image class="user-head" src="{{userInfo.avatarUrl}}"></image>
+      <view class="user-name">{{userInfo.nickName}}</view>
+    </view>
   </view>
-  <button class="unlogin-btn" bindtap='getIPosted'>我发表的</button>
-  <button class="unlogin-btn" bindtap='getMyFav'>我收藏的</button>
+    <view class='tab-button-container'>
+      <view class='tab-button'><button class="{{displayMyFav? 'active' : 'inactive'}}" bindtap='getMyFav'>我收藏的</button></view>
+      <view class='tab-button'><button class="{{displayIPosted? 'active' : 'inactive'}}" bindtap='getIPosted'>我发表的</button></view> 
+    </view>
+    <!-- 展示用户收藏的影评列表 -->
+    <view class='users-list-container' wx:if="{{displayMyFav}}" wx:for="{{favList}}" wx:key="{{item.id}}">
+      <view class='review-card'>
+        <image class='review-movie-image' src='{{item.image}}'></image>
+        <view class='review-text-container'>
+          <view class='review-title-container'>{{item.title}}</view>
+          <view class='review-content-container text' wx:if="{{item.type == 'text'}}">{{item.content}}</view>
+          <view class='review-content-container audio' wx:if="{{item.type == 'audio'}}">
+            <button bindtap='playRecording'> {{ isPlaying ? '播放中...' : '点击播放影评'}}</button>
+          </view>
+          <view class='reviewer-info-container'>
+            <image class='reviewer-avatar' src='{{item.useravatar}}'></image>
+            <text class='reviewer-username'>{{item.username}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+    <!-- 展示用户发表的影评列表 -->
+    <view class='users-list-container' wx:if="{{displayIPosted}}" wx:for="{{myList}}" wx:key="{{item.id}}">
+      <view class='review-card'>
+        <image class='review-movie-image' src='{{item.image}}'></image>
+        <view class='review-text-container'>
+          <view class='review-title-container'>{{item.title}}</view>
+          <view class='review-content-container text' wx:if="{{item.type == 'text'}}">{{item.content}}</view>
+          <view class='review-content-container audio' wx:if="{{item.type == 'audio'}}">
+            <button data-content="{{item.content}}" bindtap='playRecording'> {{ isPlaying ? '播放中...' : '点击播放影评'}}</button>
+          </view>
+          <view class='reviewer-info-container'>
+            <image class='reviewer-avatar' src='{{item.useravatar}}'></image>
+            <text class='reviewer-username'>{{item.username}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
 </view>
+
+
 

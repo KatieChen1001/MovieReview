@@ -39,7 +39,10 @@ var config = {
         commentDetail: `${host}/weapp/comment/detail/`,
 
         // POST - add to favorite
-        addToFav: `${host}/weapp/fav`
+        addToFav: `${host}/weapp/fav`,
+
+        // GET - 获得用户收藏的影评列表和用户发表的列表
+        getList: `${host}/weapp/mine`
     }
 };
 

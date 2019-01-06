@@ -5,5 +5,5 @@
       <view class='movieText'>{{item.title}}</view>
       <view class='movieText'>{{item.category}}</view>
     </view>
-  </view>
+  </view> 
 </view>
