@@ -6,7 +6,9 @@ const innerAudioContext = wx.createInnerAudioContext();
 Page({
   data: {
     movieId: "",
-    commentList: []
+    commentList: [],
+    displayMine: false,
+    myComment: []
   },
 
   getReviewList: function(id){
@@ -20,6 +22,27 @@ Page({
       },
       fail: res => {
         console.log(res)
+      },
+      complete: (callback) => {
+        typeof callback === 'function' && callback();
+      }
+    })
+  },
+
+  getNewReviewList: function (callback) {
+    qcloud.request({
+      url: config.service.comment + this.data.movieId,
+      success: res => {
+        let data = res.data.data
+        this.setData({
+          commentList: data
+        })
+      },
+      fail: res => {
+        console.log(res)
+      },
+      complete: () => {
+        typeof callback === 'function' && callback();
       }
     })
   },
@@ -60,9 +83,31 @@ Page({
   },
 
   onLoad: function (options) {
-    this.getReviewList(options.id);
-    this.setData({
-      movieId: options.id
+    console.log(options);
+    if(options.display){
+      let temp = JSON.parse(options.myComment);
+      this.setData({
+        displayMine: true,
+        myComment: temp
+      })
+      console.log(this.data.myComment);
+    } else {
+      this.setData({
+        movieId: options.id
+      })
+      this.getReviewList(options.id);
+    }
+  },
+
+  onPullDownRefresh(){
+    this.getNewReviewList(()=>{
+      wx.stopPullDownRefresh();
+      setTimeout(function(){
+        wx.showToast({
+          title: '已刷新',
+        })
+      }, 1000)
+      
     })
   }
 })

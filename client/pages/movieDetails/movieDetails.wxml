@@ -12,14 +12,12 @@
     <navigator url='/pages/reviewList/reviewList?id={{movieID}}'>
       <button>查看影评</button>
     </navigator>
-    <button bindtap='addReview'>添加影评</button>
+    <button bindtap='addReview'>{{haveIReviewed? '我的影评' : '添加影评'}}</button>
   </view>
 
   <view class='addReview-container' wx:if="{{addingReview}}">
-    <!-- <navigator class='movie-btn' url='/pages/reviewEdit/reviewEdit?title={{title}}&image={{image}}&id={{movieID}}&type=text' hover-class='other-navigator-hover'>文字</navigator> -->
     <view bindtap='editTextReview' class='movie-btn'>文字</view>
     <view bindtap='editAudioReview' class='movie-btn border-bottom'>音频</view>
-    <!-- <navigator url='/pages/reviewEdit/reviewEdit?title={{title}}&image={{image}}&id={{movieID}}&type=audio' >音频</navigator> -->
     <view bindtap='cancelAddingReview' class='movie-btn'>取消</view>
   </view>
 </view>

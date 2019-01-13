@@ -4,6 +4,9 @@ const config = require('./config')
 
 let userInfo
 
+let favList = []
+let myList = []
+
 App({
   onLaunch: function () {
     qcloud.setLoginUrl(config.service.loginUrl)
@@ -104,9 +107,32 @@ App({
       },
       fail: () => {
         error && error(err)
-        // this.doQcloudLogin();
       }
     })
-  }
+  },
+
+  getList({success, fail}) {
+    qcloud.request({
+      url: config.service.getList,
+      login: true,
+      success: result => {
+        let data = result.data
+        console.log(data);
+        if (!data.code) {
+          favList = data.data.favComment
+          myList = data.data.myComment
+        } else {
+          wx.showToast({
+            title: '数据刷新失败',
+          })
+        }
+      },
+      fail: res => {
+        console.log(res);
+      },
+      complete: () => {
+      }
+    })
+  },
 
 })

@@ -44,8 +44,22 @@ Page({
       displayIPosted: false
     })
   },
+
+  onPullDownRefresh(){
+    wx.showLoading({
+      title: '刷新中...',
+    })
+
+    this.getList(()=> {
+      wx.stopPullDownRefresh()
+      wx.hideLoading();
+      wx.showToast({
+        title: '已刷新',
+      })
+    })
+  },
   
-  getList(){
+  getList(callback){
     qcloud.request({
       url: config.service.getList,
       login: true,
@@ -53,8 +67,9 @@ Page({
         let data = result.data
         if (!data.code) {
           let favComment = data.data.favComment
+          console.log(favComment);
           let myComment = data.data.myComment
-
+          console.log(myComment);
           this.setData({
             favList: favComment,
             myList: myComment
@@ -72,6 +87,9 @@ Page({
           icon: 'none',
           title: '数据刷新失败',
         })
+      },
+      complete: () => {
+        typeof callback === 'function' && callback();
       }
     })
   },

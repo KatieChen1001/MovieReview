@@ -14,9 +14,9 @@
       <button class='review-content audio' wx:if="{{type=='audio'}}" bindtap='playRecording'>
         {{ isPlaying ? '播放中...' : '点击播放影评'}}
       </button>
-      <view class='buttons'>
+      <!-- <view class='buttons'>
         <button bindtap='navToReviewEdit'>写影评</button>
-      </view>
+      </view> -->
     </view>
 
   </view>

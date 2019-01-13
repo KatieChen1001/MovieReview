@@ -6,7 +6,7 @@ Page({
     movieList: []
   },
 
-  getMovieList: function () {
+  getMovieList(callback) {
     wx.showLoading({
       title: '加载列表中...',
     })
@@ -15,33 +15,46 @@ Page({
       url: config.service.movieList,
       success: (response) => {
         wx.hideLoading()
-
         let data = response.data
-
         if (!data.code) {
           this.setData({
             movieList: data.data
           })
         } else {
           wx.showToast({
-            icon: 'none',
-            title: 'Loading Failed :/',
+            title: 'Loading Failed :/'
           })
         }
       },
       fail: function (err) {
-        wx.hideLoading()
         wx.showToast({
-          icon: 'none',
           title: 'Loading Failed :/'
         })
         console.log(err);
+      },
+      complete: () => {
+        wx.hideLoading()
+        typeof callback === 'function' && callback();
       }
     })
   },
 
   onLoad: function (options) {
     this.getMovieList();
+  },
+
+  onPullDownRefresh(){
+    wx.showLoading({
+      title: '刷新中...',
+    })
+
+    this.getMovieList(() => {
+      wx.stopPullDownRefresh()
+      wx.hideLoading();
+      wx.showToast({
+        title: '已刷新',
+      })
+    })
   },
 
   onTapViewDetail: function(event){

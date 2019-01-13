@@ -35,13 +35,13 @@ var config = {
         // 添加评论
         addComment: `${host}/weapp/comment`,
 
-        // GET Movie Detail
+        // 获得电影详情
         commentDetail: `${host}/weapp/comment/detail/`,
 
-        // POST - add to favorite
+        // 添加至我的收藏
         addToFav: `${host}/weapp/fav`,
 
-        // GET - 获得用户收藏的影评列表和用户发表的列表
+        // 获得用户收藏的影评列表和用户发表的列表
         getList: `${host}/weapp/mine`
     }
 };

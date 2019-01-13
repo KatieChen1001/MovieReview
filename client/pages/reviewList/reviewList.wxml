@@ -1,4 +1,6 @@
-<view class="review-card" wx:if="{{commentList.length > 0}}" wx:for="{{commentList}}"  wx:key="{{item.id}}">
+
+
+<view class="review-card" wx:if="{{!displayMine && commentList.length > 0}}" wx:for="{{commentList}}"  wx:key="{{item.id}}">
   <view class='reviewer-info'>
     <image src='{{item.useravatar}}' class='reviewer-avatar'></image>
     <text class='reviewer-name'>{{item.username}}</text>
@@ -8,6 +10,17 @@
   <button class='review-content-audio' bindtap='playRecording' wx:if="{{item.type == 'audio'}}" data-src="{{item.content}}"> {{ isPlaying ? '播放中...' : '点击播放影评'}}</button>
 </view>
 
-<view wx:if="{{commentList.length == 0}}" class="review-card empty">
+<view wx:if="{{!displayMine && commentList.length == 0}}" class="review-card empty">
   <text class='review-content'>Be the first to review this movie!</text>
 </view>
+
+<view wx:if="{{displayMine}}" wx:for="{{myComment}}" wx:key="{{item.id}}">
+  <view class='reviewer-info'>
+    <image src='{{item.useravatar}}' class='reviewer-avatar'></image>
+    <text class='reviewer-name'>{{item.username}}</text>
+    <view class='icon-svg' bindtap="viewReviewDetail" data-reviewid="{{item.id}}"></view>
+  </view>
+  <view class='review-content' wx:if="{{item.type == 'text'}}">{{item.content}}</view>
+  <button class='review-content-audio' bindtap='playRecording' wx:if="{{item.type == 'audio'}}" data-src="{{item.content}}"> {{ isPlaying ? '播放中...' : '点击播放影评'}}</button>
+</view>
+
