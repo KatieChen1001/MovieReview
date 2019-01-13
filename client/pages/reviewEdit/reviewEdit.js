@@ -13,7 +13,7 @@ Page({
     inPreviewMode: false,
     userInfo: null,
     type: "text",
-    filePath: null, // 录音暂存地址
+    filePath: null, 
     isSpeaking: false,
     isPlaying: false
   },
@@ -22,11 +22,7 @@ Page({
   publishText(event) {
     let content = this.data.review;
     let type = this.data.type;
-    if (content) {
-      wx.showLoading({
-        title: "正在发表影评"
-      });
-    }
+    
     qcloud.request({
       url: config.service.addComment,
       login: true,
@@ -37,7 +33,6 @@ Page({
         type: type
       },
       success: res => {
-        wx.hideLoading();
         let data = res.data;
         if (!data.code) {
           wx.showToast({
@@ -46,7 +41,6 @@ Page({
 
           setTimeout(() => {
             let movie = this.data.movie;
-            // 跳转影评列表界面
             wx.redirectTo({
               url: `/pages/reviewList/reviewList?id=${movie.id}`
             });
@@ -72,23 +66,15 @@ Page({
       isSpeaking: true
     });
     const options = {
-      duration: 10000, // 指定录音的时长，单位 ms
-      sampleRate: 16000, // 采样率
-      numberOfChannels: 1, // 录音通道数
-      encodeBitRate: 96000, // 编码码率
-      format: "mp3", // 音频格式，有效值 aac/mp3
-      frameSize: 50 // 指定帧大小，单位 KB
+      format: "mp3", 
     };
-    //开始录音
     recorderManager.start(options);
     recorderManager.onStart(() => {});
 
     setTimeout(() => {
-      //结束录音
       this.stopRecording();
     }, 10000);
 
-    //错误回调
     recorderManager.onError(res => {
       console.log(res);
     });
@@ -98,19 +84,17 @@ Page({
     this.stopRecording();
   },
 
-  //停止录音
   stopRecording() {
     this.setData({
       isSpeaking: false
     });
     recorderManager.stop();
     recorderManager.onStop(res => {
-      console.log("停止录音", res.tempFilePath);
       const {
         tempFilePath
       } = res;
       this.setData({
-        filePath: tempFilePath // 存储在文件暂存地址
+        filePath: tempFilePath
       });
     });
   },
