@@ -1,5 +1,4 @@
 <view class='wrapper'>
-  <!-- bg and poster -->
   <view class='card'>
     <image
         class='poster'
@@ -8,12 +7,10 @@
     <view class='title' mode='widthFix'>
       {{ movie.title }}
     </view>
-    <!-- enter comment area -->
     <form
       wx:if='{{!inPreviewMode}}'
       class='review-form'
       bindsubmit="enterPreviewMode">
-      <!-- if comment is text form -->
       <textarea
         wx:if="{{type == 'text'}}"
         placeholder='输入你的影评内容...'
@@ -21,21 +18,23 @@
         value='{{review}}'
         class='review-form-textarea'
         auto-focus="true" />
-        <!-- if comment is audio form -->
-      <button
+        <view class='audio-comment'>
+        <button class='audio-comment'
         wx:if="{{type == 'audio' && !filePath}}"
         bindtouchstart="touchdown"
         bindtouchend="touchup"
       >
         {{ isSpeaking? '录音中...' : '按住录音'}}
       </button>
-      <button
+      <button class='audio-comment'
         wx:if="{{type=='audio' && !!filePath}}"
         bindtap='playRecording'
       >
         {{ isPlaying ? '播放中...' : '点击播放影评'}}
       </button>
-      <!-- get to preview -->
+        
+        </view>
+      
       <button
         class='button-complete'
         form-type="submit"
@@ -44,7 +43,6 @@
       </button>
     </form>
 
-    <!-- re-render preview section -->
     <view class='review-preview' wx:if='{{inPreviewMode}}'>
       <view class='review-user'>
         <image

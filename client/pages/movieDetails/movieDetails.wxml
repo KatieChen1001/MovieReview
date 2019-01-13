@@ -1,15 +1,25 @@
-<view class="movie-detail-container">
-  <view class="movie-detail-img" >
-    <image src='{{image}}'></image>
+<view class="movie-detail-container {{addingReview? 'darken' : ''}}">
+  <view class="movie-detail-img">
+    <image class="{{addingReview? 'darkenedImg' : ''}}" src='{{image}}'></image>
   </view>
-  
+
   <view class='movie-text'>
     <view class='movie-title'>{{title}}</view>
     <view class='movie-description'>{{intro}}</view>
   </view>
 
-  <view class='movie-btn-container'>
-    <navigator class='movie-btn' url='/pages/reviewList/reviewList?id={{movieID}}'>查看影评</navigator>
-    <navigator url="/pages/addReview/addReview?title={{title}}&image={{image}}&intro={{intro}}&id={{movieID}}" class='movie-btn'>添加影评</navigator>
+  <view class="movie-btn-container">
+    <navigator url='/pages/reviewList/reviewList?id={{movieID}}'>
+      <button>查看影评</button>
+    </navigator>
+    <button bindtap='addReview'>添加影评</button>
+  </view>
+
+  <view class='addReview-container' wx:if="{{addingReview}}">
+    <!-- <navigator class='movie-btn' url='/pages/reviewEdit/reviewEdit?title={{title}}&image={{image}}&id={{movieID}}&type=text' hover-class='other-navigator-hover'>文字</navigator> -->
+    <view bindtap='editTextReview' class='movie-btn'>文字</view>
+    <view bindtap='editAudioReview' class='movie-btn border-bottom'>音频</view>
+    <!-- <navigator url='/pages/reviewEdit/reviewEdit?title={{title}}&image={{image}}&id={{movieID}}&type=audio' >音频</navigator> -->
+    <view bindtap='cancelAddingReview' class='movie-btn'>取消</view>
   </view>
 </view>

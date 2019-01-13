@@ -6,9 +6,7 @@
     "pages/reviewList/reviewList",
     "pages/reviewDetail/reviewDetail",
     "pages/reviewEdit/reviewEdit",
-    "pages/reviewPreview/reviewPreview",
-    "pages/user/user",
-    "pages/addReview/addReview"
+    "pages/user/user"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",

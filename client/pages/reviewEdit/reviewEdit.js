@@ -39,7 +39,6 @@ Page({
       success: res => {
         wx.hideLoading();
         let data = res.data;
-        console.log("data", data);
         if (!data.code) {
           wx.showToast({
             title: "发表影评成功"
@@ -47,7 +46,6 @@ Page({
 
           setTimeout(() => {
             let movie = this.data.movie;
-            console.log(movie.id)
             // 跳转影评列表界面
             wx.redirectTo({
               url: `/pages/reviewList/reviewList?id=${movie.id}`
@@ -67,7 +65,7 @@ Page({
   },
 
   // ======================= 编辑音频影评 ====================== //
- 
+
   // 按住开始录音
   touchdown() {
     this.setData({
@@ -83,9 +81,7 @@ Page({
     };
     //开始录音
     recorderManager.start(options);
-    recorderManager.onStart(() => {
-      console.log("录音开始");
-    });
+    recorderManager.onStart(() => {});
 
     setTimeout(() => {
       //结束录音
@@ -98,10 +94,7 @@ Page({
     });
   },
 
-  /**
-   * 松开停止录音
-   */
-  touchup: function () {
+  touchup: function() {
     this.stopRecording();
   },
 
@@ -122,13 +115,9 @@ Page({
     });
   },
 
-  /**
-   * 播放录音
-   */
   playRecording() {
     innerAudioContext.autoplay = true;
     (innerAudioContext.src = this.data.filePath),
-      console.log("this.data.filepath : " + this.data.filePath)
     innerAudioContext.onPlay(() => {
       this.setData({
         isPlaying: true
@@ -151,7 +140,6 @@ Page({
 
   uploadRecord(cb) {
     let recordPath = this.data.filePath;
-    console.log(recordPath);
     let record;
     if (recordPath) {
       wx.showLoading({
@@ -168,12 +156,10 @@ Page({
             wx.hideLoading();
             record = data.data.imgUrl;
           }
-          console.log("返回来的录音存储地址", record);
 
           wx.showLoading({
             title: "正在发表影评"
           });
-          // 回调韩式返回录音地址
           cb && cb(record);
         }
       });
@@ -182,7 +168,7 @@ Page({
     }
   },
 
-  publishAudio: function(){
+  publishAudio: function() {
     let type = this.data.type;
     this.uploadRecord(record => {
       qcloud.request({
@@ -196,10 +182,7 @@ Page({
         },
         success: result => {
           wx.hideLoading();
-
           let data = result.data;
-          console.log("data", data);
-
           if (!data.code) {
             wx.showToast({
               title: "发表影评成功"
@@ -207,7 +190,6 @@ Page({
 
             setTimeout(() => {
               let movie = this.data.movie;
-              // 跳转影评列表界面
               wx.redirectTo({
                 url: `/pages/reviewList/reviewList?id=${movie.id}`
               });
@@ -231,8 +213,6 @@ Page({
     });
   },
 
-
-  // 进入编辑模式
   enterEditMode() {
     this.setData({
       inPreviewMode: false
@@ -243,14 +223,11 @@ Page({
     let type = this.data.type;
     if (type == "text") {
       this.publishText()
-    } else if (type == "audio"){
+    } else if (type == "audio") {
       this.publishAudio()
     }
   },
 
-  /**
-   * 进入预览模式
-   */
   enterPreviewMode: function(e) {
     const review = e.detail.value.review;
     if (review) {
@@ -266,7 +243,6 @@ Page({
   },
 
   onLoad: function(options) {
-    console.log("options", options);
     this.setData({
       movie: {
         title: options.title,
@@ -280,7 +256,6 @@ Page({
       success: ({
         userInfo
       }) => {
-        console.log("userInfo", userInfo);
         this.setData({
           userInfo
         });
@@ -288,7 +263,6 @@ Page({
     })
   },
 
-  // 返回上一个界面时清除编辑信息 保证再编辑评论的时候没有历史信息保留
   onHide: function() {
     this.setData({
       review: "",

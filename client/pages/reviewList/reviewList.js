@@ -14,8 +14,6 @@ Page({
       url: config.service.comment + id,
       success: res => {
         let data = res.data.data
-        console.log("commentList: ")
-        console.log(data);
         this.setData({
           commentList: data
         })
@@ -27,19 +25,34 @@ Page({
   },
 
   // 点击播放录音
-  playRecording(e) {
-    let src = e.currentTarget.dataset.src
-    console.log(src);
-    innerAudioContext.autoplay = true
-    innerAudioContext.src = src
-    innerAudioContext.play()
+  playRecording(event) {
+    let content = event.currentTarget.dataset;
+    let filePath = content.src;
+    innerAudioContext.autoplay = true;
+    (innerAudioContext.src = filePath),
+    innerAudioContext.onPlay(() => {
+      this.setData({
+        isPlaying: true
+      });
+    });
+    innerAudioContext.onEnded(() => {
+      this.setData({
+        isPlaying: false
+      });
+    });
+    innerAudioContext.onError(res => {
+      console.log(res.errMsg);
+      console.log(res.errCode);
+      wx.showToast({
+        icon: "none",
+        title: "影评播放失败"
+      });
+    });
   },
 
   viewReviewDetail(event){
     let dataPassed = event.currentTarget.dataset;
-    console.log(dataPassed);
     let commentId = dataPassed.reviewid; 
-    console.log(commentId);
     let movieId = this.data.movieId;
     wx.navigateTo({
       url: `/pages/reviewDetail/reviewDetail?movieId=${movieId}&commentId=${commentId}`,
@@ -47,9 +60,7 @@ Page({
   },
 
   onLoad: function (options) {
-    console.log(options);
     this.getReviewList(options.id);
-    console.log(options.id);
     this.setData({
       movieId: options.id
     })

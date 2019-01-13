@@ -1,5 +1,4 @@
 <view class='wrapper'>
-  <!-- bg and poster -->
   <view class='card'>
     <image class='poster' src='{{image}}' />
     <view class='title' mode='widthFix'>{{title}}</view>
@@ -8,14 +7,14 @@
       <view class='review-user'>
         <image class='review-user-avatar' src='{{useravatar}}' />
         <view class='review-user-name'>{{ username }}的影评</view>
+        <view class="icon-svg {{saved? 'saved' : 'notsaved'}}" bindtap='saveToFav'></view>
       </view>
 
       <view class='review-content' wx:if="{{type=='text'}}">{{content}}</view>
-      <button class='review-content' wx:if="{{type=='audio'}}" bindtap='playRecording'>
+      <button class='review-content audio' wx:if="{{type=='audio'}}" bindtap='playRecording'>
         {{ isPlaying ? '播放中...' : '点击播放影评'}}
       </button>
       <view class='buttons'>
-        <button bindtap='saveToFav'>收藏影评</button>
         <button bindtap='navToReviewEdit'>写影评</button>
       </view>
     </view>

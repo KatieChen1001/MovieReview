@@ -2,14 +2,21 @@
 
 const qcloud = require('../../vendor/wafer2-client-sdk/index');
 const config = require('../../config.js');
+const innerAudioContext = wx.createInnerAudioContext();
 
 Page({
   data: {
-    posterMovie:{}
+    posterMovie:{},
+    movieId: "", 
+    hasReview: true,
+    randomReview:{}
   },
 
   getAMovie() {
-    let movieId = Math.floor(Math.random() * (15 - 1) + 1)
+    let movieId = Math.floor(Math.random() * (15 - 1) + 1);
+    this.setData({
+      movieId: movieId
+    })
     wx.showLoading({
       title: 'Loading',
     })
@@ -18,14 +25,10 @@ Page({
       url: config.service.movieDetail + movieId,
       success: res => {
         wx.hideLoading()
-
         let data = res.data
-        console.log(data)
         if (!data.code) {
-          // this.getMovieComment(movieId)
           this.setData({
             posterMovie: data.data
-            // movieId
           })
         } else {
           wx.showToast({
@@ -43,9 +46,6 @@ Page({
       },
       fail: res => {
         wx.hideLoading()
-
-        console.log(res)
-
         wx.showToast({
           icon: 'none',
           title: 'Loading Failed'
@@ -54,65 +54,70 @@ Page({
     })
   },
 
-  onTapNavigateTo: function(){
-      wx.navigateTo({
-        url: '/pages/movieList/movieList'
-      })
+  getReview: function (id) {
+    let reviewId = this.data.movieId;
+    qcloud.request({
+      url: config.service.comment + reviewId,
+      success: res => {
+        let data = res.data.data
+        if (data.length == 0) {
+          this.setData({
+            hasReview: false
+          })
+        } else {
+          let randomReviewnum = Math.floor(Math.random() * (data.length - 1));
+          this.setData({
+            randomReview: data[randomReviewnum]
+          })
+        }
+      },
+      fail: res => {
+        console.log(res)
+      }
+    })
   },
 
-  onTapNavigateToMine: function () {
+  playRecording(event) {
+    let content = event.currentTarget.dataset;
+    let filePath = content.content;
+    innerAudioContext.autoplay = true;
+    (innerAudioContext.src = filePath),
+      innerAudioContext.onPlay(() => {
+        this.setData({
+          isPlaying: true
+        });
+      });
+    innerAudioContext.onEnded(() => {
+      this.setData({
+        isPlaying: false
+      });
+    });
+    innerAudioContext.onError(res => {
+      wx.showToast({
+        icon: "none",
+        title: "影评播放失败"
+      });
+    });
+  },
+
+
+  toReviewDetail: function(event){
+    let dataPassed = event.currentTarget.dataset;
+    let commentId = dataPassed.commentid;
     wx.navigateTo({
-      url: '/pages/user/user'
+      url: '/pages/reviewDetail/reviewDetail?commentId=' + commentId,
+    })
+  },
+
+  toMovieDetail: function(){
+    let movieId = this.data.movieId;
+    wx.navigateTo({
+      url: '/pages/movieDetails/movieDetails?id=' + movieId,
     })
   },
 
   onLoad: function () {
     this.getAMovie();
-  },
-
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
+    this.getReview();
   }
 })

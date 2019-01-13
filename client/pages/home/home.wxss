@@ -1,4 +1,5 @@
 /* pages/home/home.wxss */
+
 .homepageImg{
   width: 540rpx;
   height: 800rpx;
@@ -9,21 +10,68 @@
   height: 100%;
   display: flex; 
   justify-content: center;
+  align-items: center;
 }
 .homepageTabBar{
-  height:50rpx;
+  height:100rpx;
   position: fixed;
   bottom: 0rpx;
   flex-direction: row;
-  padding-bottom: 18rpx;
 }
+
+/* =========== 主页电影标题 ========== */
 
 .text-box{
   margin-top:10rpx;
 }
 
-text .text-box{
+.text-box text{
   padding: 16rpx 0rpx;
-  font-size: 18rpx;
 }
 
+/* ======== 随机展示一条关于主页电影的评论 ======= */
+
+.review {
+  height: 200rpx;
+  width: 540rpx; 
+  margin: 0 auto;
+  font-size: 24rpx;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+}
+
+.user-head {
+  flex-shrink: 0;
+  height: 60rpx;
+  width: 60rpx;
+  background: #F5E069;
+  border-radius: 50%;
+}
+
+.user-name {
+  flex: 1;
+  margin: 0 31rpx;
+  font-weight: bold;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.review-text{
+  margin-left: 91rpx;
+}
+
+.no-review{
+  width: 540rpx;
+  font-size: 28rpx;
+  text-align: center;
+  padding: 50rpx 0;
+  margin: 0 auto;
+}
+
+.navigator-hover{
+  height:100rpx;
+}

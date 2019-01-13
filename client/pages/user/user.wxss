@@ -121,11 +121,11 @@
 }
 
 .active{
-  color: red;
+  color:black;
 }
 
 .inactive{
-  color: blue;
+  color:#a6a6a6;
 }
 
 /* 用户收藏 | 用户发表的列表展示 */
@@ -188,9 +188,8 @@
 
 .review-content-container.audio button{
   font-size: 28rpx;
+  width:300rpx;
 }
-
-
 
 .reviewer-avatar{
   flex-shrink: 0;

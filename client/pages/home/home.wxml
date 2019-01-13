@@ -1,13 +1,39 @@
 <!--pages/home/home.wxml-->
 <view>
-  <view class='center'>
-    <image class='homepageImg' src="{{posterMovie.image}}" mode='scaleToFill'></image>
+  <!-- 主页电影 -->
+  <view class='poster' bindtap='toMovieDetail'>
+    <view class='center'>
+      <image class='homepageImg' src="{{posterMovie.image}}" mode='scaleToFill'></image>
+    </view>
+    <view class='center text-box'>
+      <text>{{posterMovie.title}}</text>
+    </view>
   </view>
-    <view class='center text-box'><text>{{posterMovie.title}}</text></view>
-    <view class='center text-box'><text>{{posterMovie.category}}</text></view>
 
+
+  <!-- 主页电影影评 -->
+  <view class='review' wx:if="{{hasReview}}" bindtap='toReviewDetail' data-commentId="{{randomReview.id}}">
+    <view class='user-info'>
+      <image class="user-head" src="{{randomReview.useravatar}}"></image>
+      <view class="user-name">{{randomReview.username}}</view>
+    </view>
+    <view class='review-text' wx:if="{{randomReview.type == 'text'}}">{{randomReview.content}}</view>
+    <button class='review-text homepage-btn' wx:if="{{randomReview.type =='audio'}}" data-src="{{randomReview.content}}" catchtap='playRecording'>点击播放音频</button>
+
+  </view>
+
+  <!-- 主页电影没有影评时展示 -->
+  <view class='no-review' wx:else>
+    This movie has not been reviewed yet!
+  </view>
+
+  <!-- 主页底部TabBar -->
   <view class='homepageTabBar center'>
-    <view class='center' bindtap='onTapNavigateTo'><text>热门</text></view>
-    <view class='center' bindtap='onTapNavigateToMine'><text>我的</text></view>
+    <navigator class='center' url='/pages/movieList/movieList'>
+      热门
+    </navigator>
+    <navigator class='center' url='/pages/user/user'>
+      我的
+    </navigator>
   </view>
 </view>

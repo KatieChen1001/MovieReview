@@ -1,8 +1,8 @@
 /* pages/editReview/editReview.wxss */
 .wrapper {
   padding: 150rpx 50rpx 50rpx;
-  
 }
+
 .poster {
   position: absolute;
   top: -75rpx;
@@ -10,6 +10,7 @@
   width: 300rpx;
   height: 400rpx;
 }
+
 .card {
   position: relative;
   background-color: #fff;
@@ -17,23 +18,27 @@
   padding: 350rpx 75rpx 75rpx;
   height: 100%;
 }
+
 .title {
   font-size: 36rpx;
   font-weight: 600;
   text-align: center;
   margin-bottom: 50rpx;
 }
+
 .buttons {
   margin-top: 50rpx;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
 }
+
 button {
   font-size: 26rpx;
   margin-left: 0;
   margin-right: 0;
   color: #4c5a5e;
 }
+
 .bottom-button-wrapper {
   position: fixed;
   top: 0;
@@ -46,6 +51,7 @@ button {
   justify-content: flex-end;
   flex-direction: column;
 }
+
 .bottom-button-overlay {
   position: fixed;
   top: 0;
@@ -55,6 +61,7 @@ button {
   min-height: 100%;
   background-color: rgba(0,0,0,0.3);
 }
+
 .bottom-button {
   z-index: 1;
   width: 100%;
@@ -64,9 +71,11 @@ button {
   border-bottom: 5rpx solid #ddd;
   font-size: 34rpx;
 }
+
 .bottom-button:last-child {
   border-top: 5rpx solid #ddd;
 }
+
 .button-complete {
   position: fixed;
   bottom: 0;
@@ -79,29 +88,55 @@ button {
   text-align: center;
   border-radius: 0;
 }
+
 .review-form-textarea {
   font-size: 28rpx;
   color: #4c5a5e;
   width: auto;
 }
+
 .review-user {
   display: flex;
   align-items: center;
   margin-bottom: 20rpx;
 }
+
 .review-user-avatar {
   width: 80rpx;
   height: 80rpx;
   border-radius: 100%;
 }
+
 .review-user-name {
   font-size: 28rpx;
   color: #4c5a5e;
   margin-left: 20rpx;
+  flex-grow:2;
 }
+
+.icon-svg{
+  width: 50rpx;
+  height:50rpx;
+  background-size: cover;
+}
+
+/* saved */
+.icon-svg.saved{
+  background-image: url("data:image/svg+xml,%3Csvg t='1547283197380' class='icon' style='' viewBox='0 0 1024 1024' version='1.1' xmlns='http://www.w3.org/2000/svg' p-id='4219' xmlns:xlink='http://www.w3.org/1999/xlink' width='200' height='200'%3E%3Cdefs%3E%3Cstyle type='text/css'%3E%3C/style%3E%3C/defs%3E%3Cpath d='M565.273 34.627L677.369 272.17c8.706 18.32 25.411 31.051 44.823 33.996l250.776 38.081c48.698 7.411 68.225 70.046 32.934 105.98L824.407 635.164c-13.998 14.23-20.352 34.815-17.059 54.935l42.82 261.127c8.346 50.696-42.643 89.452-86.226 65.519L539.634 893.474c-17.286-9.526-37.992-9.526-55.278 0l-224.314 123.27c-43.583 23.934-94.572-14.822-86.22-65.518L216.638 690.1c3.32-20.12-3.089-40.705-17.087-54.935L18.11 450.227c-35.285-35.934-15.818-98.574 32.934-105.98l250.75-38.081c19.35-2.94 36.082-15.675 44.756-33.996L458.673 34.627c21.825-46.168 84.836-46.168 106.6 0z' p-id='4220' fill='%23ffca23'%3E%3C/path%3E%3C/svg%3E");
+}
+
+/* not saved */
+.icon-svg.notsaved{
+  background-image: url("data:image/svg+xml,%3Csvg t='1547283284708' class='icon' style='' viewBox='0 0 1024 1024' version='1.1' xmlns='http://www.w3.org/2000/svg' p-id='4434' xmlns:xlink='http://www.w3.org/1999/xlink' width='200' height='200'%3E%3Cdefs%3E%3Cstyle type='text/css'%3E%3C/style%3E%3C/defs%3E%3Cpath d='M1020.192 401.824c-8.864-25.568-31.616-44.288-59.008-48.352l-266.432-39.616-115.808-240.448c-12.192-25.248-38.272-41.408-66.944-41.408s-54.752 16.16-66.944 41.408l-115.808 240.448-266.464 39.616c-27.36 4.064-50.112 22.784-58.944 48.352-8.8 25.632-2.144 53.856 17.184 73.12l195.264 194.944-45.28 270.432c-4.608 27.232 7.2 54.56 30.336 70.496 12.704 8.736 27.648 13.184 42.592 13.184 12.288 0 24.608-3.008 35.776-8.992l232.288-125.056 232.32 125.056c11.168 5.984 23.488 8.992 35.744 8.992 14.944 0 29.888-4.448 42.624-13.184 23.136-15.936 34.88-43.264 30.304-70.496l-45.312-270.432 195.328-194.944c19.296-19.296 25.92-47.52 17.184-73.12zM754.816 619.616c-16.384 16.32-23.808 39.328-20.064 61.888l45.312 270.432-232.32-124.992c-11.136-6.016-23.424-8.992-35.776-8.992-12.288 0-24.608 3.008-35.744 8.992l-232.32 124.992 45.312-270.432c3.776-22.56-3.648-45.568-20.032-61.888l-195.264-194.944 266.432-39.68c24.352-3.616 45.312-18.848 55.776-40.576l115.872-240.384 115.84 240.416c10.496 21.728 31.424 36.928 55.744 40.576l266.496 39.68-195.264 194.912z' p-id='4435' fill='%23e6e6e6'%3E%3C/path%3E%3C/svg%3E");
+}
+
 .review-content {
   font-size: 28rpx;
   color: black;
   margin-left: 100rpx;
   margin-bottom: 100rpx;
+}
+
+.review-content.audio{
+  width: 300rpx;
 }

@@ -5,3 +5,23 @@
   align-items: center;
   box-sizing: border-box;
 } 
+
+button{
+  font-size: 28rpx;
+  width: 200rpx;
+  position:relative;
+  display: block;
+  margin-left: auto;
+  margin-right:auto;
+  padding-left: 28rpx;
+  padding-right: 28rpx;
+  box-sizing: border-box;
+  text-align: center;
+  text-decoration: none;
+  line-height: 2.55555;
+  border-radius:10rpx;
+  -webkit-tap-highlight-color: transparent;
+  overflow: hidden;
+  color:black;
+  background-color: #f8f8f8;
+}

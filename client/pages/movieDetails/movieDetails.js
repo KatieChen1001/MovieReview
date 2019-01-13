@@ -8,7 +8,8 @@ Page({
     movieID: "",
     title: "",
     image: "",
-    intro:""
+    intro:"",
+    addingReview: false
   },
 
   getMovieDetail: function(id){
@@ -18,7 +19,6 @@ Page({
     qcloud.request({
       url: config.service.movieDetail + id,
       success: res => {
-        console.log(res.data.data);
         let data = res.data.data;
         this.setData({
           title: data.title,
@@ -30,7 +30,40 @@ Page({
         console.log(res)
       }
     })
-  
+  },
+
+  addReview: function(){
+    this.setData({
+      addingReview: true
+    })
+  },
+
+  cancelAddingReview: function(){
+    this.setData({
+      addingReview: false
+    })
+  },
+
+  editTextReview: function(){
+    
+    let title = this.data.title;
+    let image = this.data.image;
+    let movieID = this.data.movieID;
+    wx.redirectTo({
+      url: `/pages/reviewEdit/reviewEdit?title=${title}&image=${image}&id=${movieID}&type=text`,
+    })
+
+    this.cancelAddingReview();
+  },
+
+  editAudioReview: function(){
+    let title = this.data.title;
+    let image = this.data.image;
+    let movieID = this.data.movieID;
+    wx.redirectTo({
+      url: `/pages/reviewEdit/reviewEdit?title=${title}&image=${image}&id=${movieID}&type=audio`,
+    })
+    this.cancelAddingReview();
   },
 
   onLoad: function (options) {

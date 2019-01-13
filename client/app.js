@@ -103,8 +103,8 @@ App({
         })
       },
       fail: () => {
-        // error && error(err)
-        this.doQcloudLogin();
+        error && error(err)
+        // this.doQcloudLogin();
       }
     })
   }

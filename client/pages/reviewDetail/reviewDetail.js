@@ -15,7 +15,12 @@ Page({
     username: "",
     useravatar: "",
     content: "",
-    type: ""
+    type: "",
+    saved: false
+  },
+
+  onLoad: function (options) {
+    this.getReviewDetail(options.commentId);
   },
 
   playRecording() {
@@ -47,7 +52,6 @@ Page({
       url: config.service.commentDetail + id,
       success: res => {
         let data = res.data.data
-        console.log(data);
         this.setData({
           review: {
             commentId: data.id,
@@ -75,8 +79,12 @@ Page({
   },
 
   saveToFav(){
+
+    this.setData({
+      saved: true
+    })
     let num = this.data.review;
-    console.log("num : " + num.commentId)
+
 
     qcloud.request({
       url: config.service.addToFav,
@@ -92,13 +100,6 @@ Page({
           wx.showToast({
             title: '已添加到收藏',
           });
-          // setTimeout(() => {
-          //   console.log(num.movie_id)
-          //   // 跳转影评列表界面
-          //   wx.redirectTo({
-          //     url: `/pages/reviewList/reviewList?id=${num.movie_id}`
-          //   });
-          // }, 1500);
         } else {
           wx.showToast({
             icon: 'none',
@@ -116,11 +117,5 @@ Page({
         console.log(res)
       }
     })
-  },
-
-  onLoad: function (options) {
-    console.log("comment ID: " + options.commentId)
-    console.log(this.data.review.commentId);
-    this.getReviewDetail(options.commentId);
   }
 })

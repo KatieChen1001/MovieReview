@@ -1,7 +1,9 @@
 // / pages/user / user.js
-var qcloud = require('../../vendor/wafer2-client-sdk/index');
-var config = require('../../config');
+const qcloud = require('../../vendor/wafer2-client-sdk/index');
+const config = require('../../config');
 const innerAudioContext = wx.createInnerAudioContext();
+const app = getApp();
+
 
 Page({
 
@@ -12,6 +14,21 @@ Page({
     isplaying: false,
     favList: [],
     myList: []
+  },
+
+  onShow: function () {
+    app.checkSession({
+      success: ({ userInfo }) => {
+        wx.hideLoading();
+        this.setData({
+          userInfo
+        })
+      }
+    })
+  },
+
+  onLoad: function (options) {
+    this.getList();
   },
 
   getIPosted(){
@@ -29,17 +46,11 @@ Page({
   },
   
   getList(){
-    wx.showLoading({
-      title: '正在加载列表...',
-    })
     qcloud.request({
       url: config.service.getList,
       login: true,
       success: result => {
-        wx.hideLoading()
-
         let data = result.data
-        console.log(data);
         if (!data.code) {
           let favComment = data.data.favComment
           let myComment = data.data.myComment
@@ -64,13 +75,12 @@ Page({
       }
     })
   },
-
+  
   playRecording(event) {
     let content = event.currentTarget.dataset; 
     let filePath = content.content;
     innerAudioContext.autoplay = true;
     (innerAudioContext.src = filePath),
-    console.log(filePath)
     innerAudioContext.onPlay(() => {
       this.setData({
         isPlaying: true
@@ -82,8 +92,6 @@ Page({
       });
     });
     innerAudioContext.onError(res => {
-      console.log(res.errMsg);
-      console.log(res.errCode);
       wx.showToast({
         icon: "none",
         title: "影评播放失败"
@@ -91,70 +99,16 @@ Page({
     });
   },
 
-  onLoad: function (options) {
-    
-    this.checkSession({
-      success: ({ userInfo }) => {
-        console.log(userInfo)
-        this.setData({
-          userInfo: userInfo
-        })
-      },
-      error: ({res}) => { 
-        console.log(res)
-      }
-    });
-
-    this.getList();
-  },
-
-  checkSession({ success, error }) {
-    wx.showLoading({
-      title: '正在获取登录信息...',
-    });
-    wx.checkSession({
-      success: () => {
-        this.doQcloudLogin({success, error})
-      },
-      error: (res) => {
-        wx.showToast({
-          title: '获取登陆信息失败 :/',
-        })
-        console.log(res)
-      }
-    })
-  },
-
   onTapLogin: function () {
-    this.doQcloudLogin({
+    app.doQcloudLogin({
       success: ({ userInfo }) => {
+        wx.hideLoading();
         this.setData({
           userInfo: userInfo
         })
       },
       fail: ({res}) => {
         console.log(res)
-      }
-    })
-  },
-
-  doQcloudLogin({ success, error }) {
-    // 调用 qcloud 登陆接口
-    qcloud.setLoginUrl(config.service.loginUrl)
-    qcloud.login({
-      success: result => {
-        wx.hideLoading();
-        console.log(result)
-        if (result) {
-          let userInfo = result
-          success && success({
-            userInfo
-          })
-        } 
-      },
-      fail: result => {
-        // error && error()
-        console.log(result)
       }
     })
   }

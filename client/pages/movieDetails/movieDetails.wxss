@@ -42,15 +42,23 @@ page{
   display: flex;
 }
 
-navigator.movie-btn{
+.darken{
+  background: rgba(0,0, 0, 0.3)
+}
+
+.darkenedImg{
+  opacity: 0.3;
+}
+
+.addReview-container{
+  width:100%;
+  position:fixed;
+  bottom:0rpx;
+}
+
+.movie-btn{
   font-size: 28rpx;
-  width: 200rpx;
-  position:relative;
   display: block;
-  margin-left: auto;
-  margin-right:auto;
-  padding-left: 28rpx;
-  padding-right: 28rpx;
   box-sizing: border-box;
   text-align: center;
   text-decoration: none;
@@ -60,5 +68,16 @@ navigator.movie-btn{
   overflow: hidden;
   color:black;
   background-color: #f8f8f8;
+  width: 650rpx;
+  padding: 10rpx 0;
 }
+
+.border-bottom{
+  border-bottom: 3px solid #adadad;
+}
+
+.other-navigator-hover{
+  background-color: #adadad;
+}
+
 
